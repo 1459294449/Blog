@@ -3,7 +3,7 @@ title: "Claude Code 使用指南：通过 GitHub Copilot 代理使用 Claude"
 date: "2025-07-25"
 excerpt: "详细介绍如何配置和使用 Claude Code，通过 GitHub Copilot API 代理实现高效的 AI 辅助编程。"
 tags: ["claude-code", "github-copilot", "ai编程", "开发工具", "配置指南"]
-author: "技术博主"
+author: "MarkChin"
 ---
 
 # Claude Code 使用指南：通过 GitHub Copilot 代理使用 Claude
