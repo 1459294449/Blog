@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import BackgroundImage from '@/components/BackgroundImage';
 import { ContentCard } from '@/components/GlassCard';
+import MarkdownContent from '@/components/MarkdownContent';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -116,9 +117,9 @@ export default async function PostPage({ params }: PostPageProps) {
           </header>
 
           {/* 文章内容 */}
-          <div
+          <MarkdownContent
+            content={postData.contentHtml}
             className="prose prose-lg max-w-none prose-invert"
-            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
 
           {/* 文章底部 */}

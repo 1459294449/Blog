@@ -117,7 +117,7 @@ foreach ($update in $updates) {
     $afterText = $update.after
     $imageName = $update.image
     $altText = $update.alt
-    $imagePath = "/Blog/images/git-guide/$imageName"
+    $imagePath = "/images/git-guide/$imageName"
     $imageMarkdown = "`n`n![$altText]($imagePath)`n"
     
     if ($content -match [regex]::Escape($afterText)) {
