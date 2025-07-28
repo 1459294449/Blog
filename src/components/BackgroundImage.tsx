@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { getImagePath } from '@/utils/paths';
 
 interface BackgroundImageProps {
   theme?: 'auto' | 'light' | 'dark';
@@ -12,7 +13,7 @@ interface BackgroundImageProps {
 export default function BackgroundImage({
   theme = 'auto',
   className = '',
-  imageUrl = '/images/bg3.jpg',
+  imageUrl = getImagePath('bg3.jpg'),
   fallbackGradient = true
 }: BackgroundImageProps) {
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
