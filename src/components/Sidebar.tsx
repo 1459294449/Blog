@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import SearchBox from './SearchBox';
@@ -11,7 +11,6 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ posts, className = '' }: SidebarProps) {
-  const [searchQuery, setSearchQuery] = useState('');
 
   // 获取推荐文章（最新的3篇）
   const recommendedPosts = posts.slice(0, 3);
@@ -80,7 +79,7 @@ export default function Sidebar({ posts, className = '' }: SidebarProps) {
             推荐文章
           </h4>
           <div className="space-y-3">
-            {recommendedPosts.map((post, index) => (
+            {recommendedPosts.map((post) => (
               <Link
                 key={post.id}
                 href={`/posts/${post.id}`}

@@ -7,13 +7,10 @@ interface SakuraEffectProps {
   className?: string;
 }
 
-export default function SakuraEffect({ enabled = true, className = '' }: SakuraEffectProps) {
-  const [isActive, setIsActive] = useState(false);
+export default function SakuraEffect({ enabled = true }: SakuraEffectProps) {
 
   useEffect(() => {
     if (!enabled) return;
-
-    let sakuraModule: any = null;
 
     const loadSakura = async () => {
       try {
@@ -23,7 +20,6 @@ export default function SakuraEffect({ enabled = true, className = '' }: SakuraE
         script.onload = () => {
           if (window.sakura) {
             window.sakura.startSakura();
-            setIsActive(true);
           }
         };
         document.head.appendChild(script);
@@ -37,7 +33,6 @@ export default function SakuraEffect({ enabled = true, className = '' }: SakuraE
     return () => {
       if (window.sakura) {
         window.sakura.stopSakura();
-        setIsActive(false);
       }
     };
   }, [enabled]);

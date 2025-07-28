@@ -3,8 +3,6 @@ import BackgroundImage from '@/components/BackgroundImage';
 import MainLayout from '@/components/MainLayout';
 import Sidebar from '@/components/Sidebar';
 import ArticleList from '@/components/ArticleList';
-import { ContentCard } from '@/components/GlassCard';
-import PostCard from '@/components/PostCard';
 
 export default function PostsPage() {
   const allPostsData = getSortedPostsData();

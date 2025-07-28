@@ -52,7 +52,7 @@ export default function About() {
             关于我
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300">
-            Hello, I'm MarkChin
+            Hello, I&apos;m MarkChin
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export default function About() {
               💡 博客理念
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              "探索世界的无限风景" - 这不仅是我博客的副标题，更是我对技术学习的态度。
+              &ldquo;探索世界的无限风景&rdquo; - 这不仅是我博客的副标题，更是我对技术学习的态度。
               我相信每一行代码都是通往新世界的桥梁，每一个项目都是探索未知的旅程。
             </p>
 
