@@ -1,0 +1,140 @@
+import { getAllPostIds, getPostData } from '@/lib/markdown';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import BackgroundImage from '@/components/BackgroundImage';
+import { ContentCard } from '@/components/GlassCard';
+
+interface PostPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const paths = getAllPostIds();
+  return paths.map((path) => ({
+    id: path.params.id,
+  }));
+}
+
+export async function generateMetadata({ params }: PostPageProps) {
+  const { id } = await params;
+  
+  try {
+    const postData = await getPostData(id);
+    return {
+      title: `${postData.title} | Tech Blog`,
+      description: postData.excerpt || `Read ${postData.title} on Tech Blog`,
+      openGraph: {
+        title: postData.title,
+        description: postData.excerpt || `Read ${postData.title} on Tech Blog`,
+        type: 'article',
+        publishedTime: postData.date,
+        authors: [postData.author || 'Anonymous'],
+        tags: postData.tags,
+      },
+    };
+  } catch {
+    return {
+      title: 'Post Not Found | Tech Blog',
+      description: 'The requested blog post could not be found.',
+    };
+  }
+}
+
+export default async function PostPage({ params }: PostPageProps) {
+  const { id } = await params;
+  
+  let postData;
+  try {
+    postData = await getPostData(id);
+  } catch {
+    notFound();
+  }
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  return (
+    <>
+      {/* Poetize风格背景 */}
+      <BackgroundImage />
+
+      {/* 主容器 */}
+      <div className="poetize-container">
+        {/* 返回按钮 */}
+        <div className="w-full max-w-4xl mb-6 animate-fade-in">
+          <Link
+            href="/posts"
+            className="inline-flex items-center text-white/80 hover:text-white transition-colors glass-card px-4 py-2"
+          >
+            <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            返回文章列表
+          </Link>
+        </div>
+
+        {/* 文章内容卡片 */}
+        <ContentCard className="max-w-4xl animate-scale-in">
+          {/* 文章头部 */}
+          <header className="mb-8 pb-6 border-b border-white/20">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+              {postData.title}
+            </h1>
+
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center text-white/60">
+                <time dateTime={postData.date} className="text-sm">
+                  {formatDate(postData.date)}
+                </time>
+                {postData.author && (
+                  <>
+                    <span className="mx-2">•</span>
+                    <span className="text-sm">{postData.author}</span>
+                  </>
+                )}
+              </div>
+
+              {postData.tags && postData.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {postData.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/10 text-white/80 hover:bg-white/20 transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </header>
+
+          {/* 文章内容 */}
+          <div
+            className="prose prose-lg max-w-none prose-invert"
+            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          />
+
+          {/* 文章底部 */}
+          <footer className="mt-8 pt-6 border-t border-white/20 text-center">
+            <Link
+              href="/posts"
+              className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium transition-all duration-300 backdrop-blur-sm border border-white/20"
+            >
+              <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              返回所有文章
+            </Link>
+          </footer>
+        </ContentCard>
+      </div>
+    </>
+  );
+}
