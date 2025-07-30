@@ -9,7 +9,7 @@ const getRepoName = () => {
     return '/' + process.env.GITHUB_REPOSITORY.split('/')[1];
   }
   // 本地开发时的默认值
-  return '/Blog';
+  return '/MarkchinSpace';
 };
 
 const repoName = getRepoName();

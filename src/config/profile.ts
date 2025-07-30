@@ -3,7 +3,8 @@ export const profileConfig = {
   // 基本信息
   name: 'MarkChin',
   title: '211本科人工智能',
-  bio: '欢迎来到我的个人博客！211人工智能本科，科技、小说、动漫爱好者。希望您可以喜欢我的博客。',
+  siteName: 'MarkChin Space',
+  bio: '欢迎来到 MarkChin Space！211人工智能本科，科技、小说、动漫爱好者。希望您可以喜欢我的博客。',
   
   // 头像设置
   avatar: {
