@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import { getAssetPath } from '@/utils/paths';
+import OptimizedImage from './OptimizedImage';
 
 // 客户端图片组件，处理错误回退
 function CoverImage({ post }: { post: PostMetadata }) {
@@ -41,7 +42,7 @@ function CoverImage({ post }: { post: PostMetadata }) {
   }
 
   return (
-    <img
+    <OptimizedImage
       src={getAssetPath(post.cover)}
       alt={`${post.title} 封面`}
       className="absolute inset-0 w-full h-full object-cover"

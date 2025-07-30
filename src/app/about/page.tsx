@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import { getImagePath } from '@/utils/paths';
-import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
+import { profileConfig } from '@/config/profile';
+import AboutAvatar from '@/components/AboutAvatar';
 
 export const metadata: Metadata = {
   title: 'About | MarkChin 的个人博客',
@@ -52,20 +52,7 @@ export default function About() {
         <div className="text-center mb-12">
           {/* 个人头像 */}
           <div className="mb-8">
-            <img
-              src={getAvatarPath()}
-              alt={`${profileConfig.name} Avatar`}
-              className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-orange-200 dark:border-orange-800 shadow-lg"
-              onError={(e) => {
-                // 如果头像加载失败，显示默认样式
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const parent = target.parentElement;
-                if (parent) {
-                  parent.innerHTML = `<div class="w-32 h-32 rounded-full mx-auto bg-gradient-to-r from-orange-400 to-red-400 flex items-center justify-center border-4 border-orange-200 dark:border-orange-800 shadow-lg"><span class="text-white text-4xl font-bold">${getFallbackLetter()}</span></div>`;
-                }
-              }}
-            />
+            <AboutAvatar />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             关于我

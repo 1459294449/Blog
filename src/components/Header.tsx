@@ -5,8 +5,7 @@ import { useState } from 'react';
 import ThemeToggle, { ThemeToggleSimple } from './ThemeToggle';
 import { SearchIcon } from './SearchBox';
 import { SakuraToggle } from './SakuraEffect';
-import { getImagePath } from '@/utils/paths';
-import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
+import HeaderAvatar from './HeaderAvatar';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,21 +18,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
             <div className="w-10 h-10 rounded-full overflow-hidden backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300">
-              <img
-                src={getAvatarPath()}
-                alt={`${profileConfig.name} Avatar`}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // 如果头像加载失败，显示默认的字母
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent) {
-                    parent.className = "w-10 h-10 bg-gradient-to-r from-white/20 to-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300";
-                    parent.innerHTML = `<span class="text-white text-lg font-bold">${getFallbackLetter()}</span>`;
-                  }
-                }}
-              />
+              <HeaderAvatar />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-white font-bold text-lg">MarkChin</h1>

@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import SearchBox from './SearchBox';
-import { getImagePath } from '@/utils/paths';
 import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
+import OptimizedImage from './OptimizedImage';
 
 interface SidebarProps {
   posts: PostMetadata[];
@@ -35,7 +35,7 @@ export default function Sidebar({ posts, className = '' }: SidebarProps) {
       <div className="glass-card p-6 text-center animate-fade-in">
         {/* 头像 */}
         <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/20">
-          <img
+          <OptimizedImage
             src={getAvatarPath()}
             alt={`${profileConfig.name} 头像`}
             className="w-full h-full object-cover"
