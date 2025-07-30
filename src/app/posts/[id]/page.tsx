@@ -6,7 +6,6 @@ import { ContentCard } from '@/components/GlassCard';
 import MarkdownContent from '@/components/MarkdownContent';
 import ArticleThemeToggle from '@/components/ArticleThemeToggle';
 import TableOfContents from '@/components/TableOfContents';
-import { getAssetPath } from '@/utils/paths';
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -106,29 +105,6 @@ export default async function PostPage({ params }: PostPageProps) {
             <ContentCard className="w-11/12">
               {/* 文章头部 */}
               <header className="mb-8 pb-6 border-b border-white/20">
-                {/* 封面图片 */}
-                {postData.cover && (
-                  <div className="mb-6 -mx-6 sm:-mx-8 lg:-mx-12">
-                    <div className="relative overflow-hidden rounded-xl aspect-[16/9] bg-gradient-to-br from-orange-400/20 to-pink-400/20">
-                      <img
-                        src={getAssetPath(postData.cover)}
-                        alt={`${postData.title} 封面`}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          // 如果图片加载失败，隐藏封面区域
-                          const target = e.target as HTMLImageElement;
-                          const container = target.closest('.mb-6');
-                          if (container) {
-                            container.remove();
-                          }
-                        }}
-                      />
-                      {/* 渐变遮罩 */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                    </div>
-                  </div>
-                )}
-
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                   {postData.title}
                 </h1>

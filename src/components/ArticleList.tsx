@@ -5,6 +5,51 @@ import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import { getAssetPath } from '@/utils/paths';
 
+// 客户端图片组件，处理错误回退
+function CoverImage({ post }: { post: PostMetadata }) {
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    target.style.display = 'none';
+    const parent = target.parentElement;
+    if (parent) {
+      parent.innerHTML = `
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <span class="text-white text-2xl font-bold">${post.title.charAt(0)}</span>
+            </div>
+            <p class="text-white/60 text-sm">文章封面</p>
+          </div>
+        </div>
+      `;
+    }
+  };
+
+  if (!post.cover) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+            <span className="text-white text-2xl font-bold">
+              {post.title.charAt(0)}
+            </span>
+          </div>
+          <p className="text-white/60 text-sm">文章封面</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={getAssetPath(post.cover)}
+      alt={`${post.title} 封面`}
+      className="absolute inset-0 w-full h-full object-cover"
+      onError={handleImageError}
+    />
+  );
+}
+
 interface ArticleListProps {
   posts: PostMetadata[];
   className?: string;
@@ -36,44 +81,7 @@ export default function ArticleList({ posts, className = '' }: ArticleListProps)
               <div className={`lg:col-span-2 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                 <Link href={`/posts/${post.id}`}>
                   <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-gradient-to-br from-orange-400/20 to-pink-400/20 group-hover:scale-105 transition-transform duration-500">
-                    {/* 封面图片 */}
-                    {post.cover ? (
-                      <img
-                        src={getAssetPath(post.cover)}
-                        alt={`${post.title} 封面`}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        onError={(e) => {
-                          // 如果图片加载失败，显示占位图片
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const parent = target.parentElement;
-                          if (parent) {
-                            parent.innerHTML = `
-                              <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="text-center">
-                                  <div class="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">${post.title.charAt(0)}</span>
-                                  </div>
-                                  <p class="text-white/60 text-sm">文章封面</p>
-                                </div>
-                              </div>
-                            `;
-                          }
-                        }}
-                      />
-                    ) : (
-                      /* 默认占位图片 */
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center">
-                            <span className="text-white text-2xl font-bold">
-                              {post.title.charAt(0)}
-                            </span>
-                          </div>
-                          <p className="text-white/60 text-sm">文章封面</p>
-                        </div>
-                      </div>
-                    )}
+                    <CoverImage post={post} />
                     
                     {/* 悬浮遮罩 */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
