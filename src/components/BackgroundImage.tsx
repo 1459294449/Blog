@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getImagePath } from '@/utils/paths';
+import { getAssetPath } from '@/utils/paths';
 
 interface BackgroundImageProps {
   theme?: 'auto' | 'light' | 'dark';
@@ -13,12 +13,32 @@ interface BackgroundImageProps {
 export default function BackgroundImage({
   theme = 'auto',
   className = '',
-  imageUrl = getImagePath('bg3.jpg'),
+  imageUrl = getAssetPath('/images/bg3.jpg'),
   fallbackGradient = true
 }: BackgroundImageProps) {
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
+  const [isMobile, setIsMobile] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    // 检测是否为移动设备
+    const checkMobile = () => {
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || window.innerWidth <= 768;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // 预加载背景图片
+    if (imageUrl) {
+      const img = new Image();
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => setImageLoaded(false);
+      img.src = imageUrl;
+    }
+
     // 监听主题切换事件
     const handleThemeChange = (e: CustomEvent) => {
       const newTheme = e.detail;
@@ -46,6 +66,7 @@ export default function BackgroundImage({
       return () => {
         mediaQuery.removeEventListener('change', handleChange);
         window.removeEventListener('themeChange', handleThemeChange as EventListener);
+        window.removeEventListener('resize', checkMobile);
       };
     } else {
       setCurrentTheme(savedTheme as 'light' | 'dark');
@@ -53,26 +74,41 @@ export default function BackgroundImage({
 
     return () => {
       window.removeEventListener('themeChange', handleThemeChange as EventListener);
+      window.removeEventListener('resize', checkMobile);
     };
-  }, [theme]);
+  }, [theme, imageUrl]);
 
   return (
     <div className={`poetize-background ${className}`}>
-      {/* 主背景图片 */}
+      {/* 主背景图片 - PC端使用fixed，移动端使用scroll */}
       {imageUrl && (
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
             backgroundImage: `url('${imageUrl}')`,
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: isMobile ? 'scroll' : 'fixed',
+            // 移动端额外优化
+            ...(isMobile && {
+              minHeight: '100dvh', // 动态视口高度，回退到 100vh
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              // 移动端性能优化
+              willChange: 'auto',
+              transform: 'translateZ(0)', // 硬件加速
+            })
           }}
         />
       )}
 
       {/* 渐变背景（作为备选或叠加） */}
-      {(fallbackGradient || !imageUrl) && (
+      {(fallbackGradient || !imageUrl || !imageLoaded) && (
         <div
-          className={`absolute inset-0 transition-opacity duration-1000 ${imageUrl ? 'opacity-20' : 'opacity-100'}`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            imageUrl && imageLoaded ? 'opacity-20' : 'opacity-100'
+          }`}
           style={{
             background: currentTheme === 'dark'
               ? 'linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%)'

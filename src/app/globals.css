@@ -1074,6 +1074,79 @@ body {
   scroll-behavior: smooth;
 }
 
+/* 移动端文章内容优化 */
+@media (max-width: 768px) {
+  .article-content {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .article-content h1 { font-size: 1.75rem; margin: 1.5rem 0 1rem 0; }
+  .article-content h2 { font-size: 1.5rem; margin: 1.25rem 0 0.75rem 0; }
+  .article-content h3 { font-size: 1.25rem; margin: 1rem 0 0.5rem 0; }
+  .article-content h4 { font-size: 1.125rem; margin: 0.875rem 0 0.5rem 0; }
+
+  .article-content p {
+    margin: 0.75rem 0;
+    text-align: justify;
+  }
+
+  .article-content img {
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
+
+  .article-content pre {
+    font-size: 14px;
+    overflow-x: auto;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .article-content code {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .article-content blockquote {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    font-size: 15px;
+  }
+
+  .article-content ul, .article-content ol {
+    padding-left: 1.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .article-content li {
+    margin: 0.25rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-content {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .article-content h1 { font-size: 1.5rem; }
+  .article-content h2 { font-size: 1.375rem; }
+  .article-content h3 { font-size: 1.125rem; }
+  .article-content h4 { font-size: 1rem; }
+
+  .article-content pre {
+    font-size: 13px;
+    padding: 0.75rem;
+  }
+
+  .article-content code {
+    font-size: 13px;
+  }
+}
+
 .article-content h1,
 .article-content h2,
 .article-content h3,
@@ -1167,6 +1240,68 @@ html, body {
 
   .toc-item-clicked {
     animation: none !important;
+  }
+}
+
+/* 移动端触摸和交互优化 */
+@media (max-width: 768px) {
+  /* 移动端背景图片优化 */
+  .poetize-background {
+    /* 确保背景在移动端正确显示 */
+    min-height: 100vh;
+    min-height: 100dvh; /* 动态视口高度 */
+  }
+
+  .poetize-background > div[style*="background-attachment: fixed"] {
+    /* 强制移动端使用 scroll 而不是 fixed */
+    background-attachment: scroll !important;
+    /* 优化移动端背景显示 */
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* 触摸目标大小优化 */
+  button, .btn, a[role="button"], .toc-item {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+
+  /* 移动端卡片间距优化 */
+  .glass-card-elegant {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 移动端文字选择优化 */
+  .article-content {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* 移动端滚动优化 */
+  .toc-content {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 移动端输入框优化 */
+  input, textarea {
+    font-size: 16px; /* 防止 iOS Safari 缩放 */
+  }
+}
+
+@media (max-width: 480px) {
+  /* 小屏幕设备额外优化 */
+  .glass-card {
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  /* 小屏幕按钮优化 */
+  button, .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 16px;
   }
 }
 
