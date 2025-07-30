@@ -89,7 +89,7 @@ export function ContentCard({
   className?: string;
 }) {
   return (
-    <GlassCard variant="strong" className={`p-6 ${className}`}>
+    <GlassCard variant="strong" hover = {false} className={`p-6 ${className}`}>
       {title && (
         <h2 className="text-xl font-bold text-white mb-4">{title}</h2>
       )}

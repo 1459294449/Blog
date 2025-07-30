@@ -13,6 +13,7 @@ export interface PostData {
   excerpt?: string;
   tags?: string[];
   author?: string;
+  cover?: string;
   contentHtml: string;
 }
 
@@ -23,6 +24,7 @@ export interface PostMetadata {
   excerpt?: string;
   tags?: string[];
   author?: string;
+  cover?: string;
 }
 
 // Ensure posts directory exists
@@ -66,6 +68,7 @@ export function getSortedPostsData(): PostMetadata[] {
         excerpt: matterResult.data.excerpt || '',
         tags: matterResult.data.tags || [],
         author: matterResult.data.author || 'Anonymous',
+        cover: matterResult.data.cover || '',
       };
     });
 
@@ -132,6 +135,7 @@ export async function getPostData(id: string): Promise<PostData> {
     excerpt: matterResult.data.excerpt || '',
     tags: matterResult.data.tags || [],
     author: matterResult.data.author || 'Anonymous',
+    cover: matterResult.data.cover || '',
   };
 }
 

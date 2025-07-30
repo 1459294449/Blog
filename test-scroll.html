@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 300vh;
+        }
+        
+        .toc {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        
+        .toc button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .toc button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .content {
+            margin-left: 250px;
+            max-width: 800px;
+        }
+        
+        h1, h2, h3 {
+            margin: 100px 0 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="toc">
+        <h3>目录</h3>
+        <button onclick="scrollToElement('section1')">第一节</button>
+        <button onclick="scrollToElement('section2')">第二节</button>
+        <button onclick="scrollToElement('section3')">第三节</button>
+        <button onclick="scrollToElement('section4')">第四节</button>
+        <button onclick="testBasicScroll()">测试基本滚动</button>
+    </nav>
+    
+    <div class="content">
+        <h1 id="section1">第一节</h1>
+        <p>这是第一节的内容。Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        
+        <h2 id="section2">第二节</h2>
+        <p>这是第二节的内容。Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        
+        <h2 id="section3">第三节</h2>
+        <p>这是第三节的内容。Ut enim ad minim veniam, quis nostrud exercitation.</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        
+        <h2 id="section4">第四节</h2>
+        <p>这是第四节的内容。Duis aute irure dolor in reprehenderit in voluptate.</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+        <p>更多内容...</p>
+    </div>
+    
+    <script>
+        function scrollToElement(elementId) {
+            console.log('Attempting to scroll to:', elementId);
+            
+            const element = document.getElementById(elementId);
+            if (element) {
+                console.log('Element found:', element);
+                console.log('Current scroll position:', window.scrollY);
+                console.log('Element position:', element.getBoundingClientRect());
+                
+                // 方法1: scrollIntoView
+                try {
+                    element.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                    console.log('scrollIntoView called');
+                } catch (error) {
+                    console.error('scrollIntoView failed:', error);
+                    
+                    // 方法2: window.scrollTo
+                    const rect = element.getBoundingClientRect();
+                    const targetY = window.scrollY + rect.top - 100;
+                    
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: 'smooth'
+                    });
+                    console.log('window.scrollTo called with target:', targetY);
+                }
+                
+                // 检查滚动是否发生
+                setTimeout(() => {
+                    console.log('After scroll attempt:', window.scrollY);
+                }, 1000);
+                
+            } else {
+                console.error('Element not found:', elementId);
+            }
+        }
+        
+        function testBasicScroll() {
+            console.log('Testing basic scroll...');
+            console.log('Current position:', window.scrollY);
+            
+            window.scrollTo({
+                top: window.scrollY + 500,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+                console.log('After basic scroll test:', window.scrollY);
+            }, 1000);
+        }
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', () => {
+            console.log('Scroll event fired, position:', window.scrollY);
+        });
+    </script>
+</body>
+</html>

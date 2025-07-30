@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import { getImagePath } from '@/utils/paths';
+import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
 
 export const metadata: Metadata = {
   title: 'About | MarkChin 的个人博客',
@@ -48,11 +50,28 @@ export default function About() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Title */}
         <div className="text-center mb-12">
+          {/* 个人头像 */}
+          <div className="mb-8">
+            <img
+              src={getAvatarPath()}
+              alt={`${profileConfig.name} Avatar`}
+              className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-orange-200 dark:border-orange-800 shadow-lg"
+              onError={(e) => {
+                // 如果头像加载失败，显示默认样式
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const parent = target.parentElement;
+                if (parent) {
+                  parent.innerHTML = `<div class="w-32 h-32 rounded-full mx-auto bg-gradient-to-r from-orange-400 to-red-400 flex items-center justify-center border-4 border-orange-200 dark:border-orange-800 shadow-lg"><span class="text-white text-4xl font-bold">${getFallbackLetter()}</span></div>`;
+                }
+              }}
+            />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             关于我
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300">
-            Hello, I&apos;m MarkChin
+            Hello, I&apos;m {profileConfig.name}
           </p>
         </div>
 
@@ -60,11 +79,10 @@ export default function About() {
         <div className="prose prose-lg max-w-none dark:prose-invert">
           <div className="poetize-card rounded-xl p-8 mb-8 animate-scale-in">
             <h2 className="text-2xl font-bold gradient-text-orange mb-4 animate-text-shimmer">
-              👋 你好，我是 MarkChin
+              👋 你好，我是 {profileConfig.name}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6 animate-fade-in-delay">
-              欢迎来到我的个人博客！我是一名热爱技术的开发者，专注于现代 Web 开发技术。
-              在这里，我会分享我的学习心得、项目经验和对技术的思考。
+              {profileConfig.bio}
             </p>
 
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">

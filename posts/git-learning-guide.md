@@ -3,11 +3,12 @@ title: "git使用指南"
 date: "2025-07-28"
 excerpt: "介绍了git的基本概念和常用命令，深化对git的理解。"
 tags: ["git", "开发工具", "配置指南"]
+cover: "/images/git-guide/cover.webp" #不使用绝对路径
 author: "MarkChin"
 ---
 
 
-###1.基础知识
+### 1.基础知识
 **集中式版本控制系统**
 
 **分布式版本控制系统**
@@ -65,7 +66,7 @@ Staging Area/Index(暂存区)
 
 Local Repository（本地仓库）
 
-#### 文件状态
+#### 1.文件状态
 
 图中形象表明了各种文件状态之间的关系。
 

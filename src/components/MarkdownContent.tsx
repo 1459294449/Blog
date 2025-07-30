@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { getAssetPath } from '@/utils/paths';
+import { addHeadingIds } from '@/utils/headingUtils';
 
 interface MarkdownContentProps {
   content: string;
@@ -22,6 +23,9 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
           img.src = getAssetPath(src);
         }
       });
+
+      // 为所有标题添加ID（用于目录导航）
+      addHeadingIds(contentRef.current);
     }
   }, [content]);
 

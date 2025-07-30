@@ -4,6 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import SearchBox from './SearchBox';
+import { getImagePath } from '@/utils/paths';
+import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
 
 interface SidebarProps {
   posts: PostMetadata[];
@@ -31,11 +33,25 @@ export default function Sidebar({ posts, className = '' }: SidebarProps) {
     <div className={`space-y-6 ${className}`}>
       {/* 网站信息卡片 */}
       <div className="glass-card p-6 text-center animate-fade-in">
-        <div className="w-24 h-24 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse-glow">
-          <span className="text-white text-3xl font-bold">M</span>
+        {/* 头像 */}
+        <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/20">
+          <img
+            src={getAvatarPath()}
+            alt={`${profileConfig.name} 头像`}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // 如果头像加载失败，显示默认的字母头像
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const parent = target.parentElement;
+              if (parent) {
+                parent.innerHTML = `<div class="w-full h-full bg-gradient-to-r from-orange-400 to-pink-400 flex items-center justify-center animate-pulse-glow"><span class="text-white text-3xl font-bold">${getFallbackLetter()}</span></div>`;
+              }
+            }}
+          />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">MarkChin</h3>
-        <p className="text-white/70 text-sm mb-4">Full Stack Developer</p>
+        <h3 className="text-xl font-bold text-white mb-2">{profileConfig.name}</h3>
+        <p className="text-white/70 text-sm mb-4">{profileConfig.title}</p>
         
         {/* 统计信息 */}
         <div className="grid grid-cols-3 gap-4 mb-4">

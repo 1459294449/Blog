@@ -106,15 +106,15 @@ body {
 }
 
 .glass-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  /* transform: translateY(-4px) scale(1.02);
   box-shadow:
     0 16px 48px var(--glass-shadow),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 20px rgba(255, 255, 255, 0.1);
+    0 0 20px rgba(255, 255, 255, 0.1); */
 }
 
 .glass-card-strong {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgb(210, 180, 140,0.9); /* 古典米棕色 */
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
 }
@@ -155,7 +155,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   .glass-card-strong {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
   }
 
   .glass-card-elegant {
@@ -219,14 +219,14 @@ body {
 .prose {
   max-width: none;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(7, 6, 6, 0.9);
 }
 
 .prose h1, .prose h2, .prose h3 {
   font-weight: 600;
   line-height: 1.25;
   margin: 2rem 0 1rem 0;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .prose h1 { font-size: 2.25rem; }
@@ -235,7 +235,7 @@ body {
 
 .prose p {
   margin-bottom: 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .prose pre {
@@ -751,4 +751,558 @@ body {
 .scroll-reveal.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 文章主题样式 */
+/* 原始主题 */
+.article-theme-original {
+  /* 保持原有样式 */
+}
+
+/* 纯白主题 */
+.article-theme-pure-white .poetize-background {
+  background: #ffffff !important;
+  animation: none !important;
+}
+
+.article-theme-pure-white .poetize-background::before {
+  display: none !important;
+}
+
+.article-theme-pure-white .glass-card {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .prose {
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .prose h1,
+.article-theme-pure-white .prose h2,
+.article-theme-pure-white .prose h3,
+.article-theme-pure-white .prose h4,
+.article-theme-pure-white .prose h5,
+.article-theme-pure-white .prose h6 {
+  color: #1a1a1a !important;
+}
+
+.article-theme-pure-white .prose p {
+  color: #444444 !important;
+}
+
+.article-theme-pure-white .prose pre {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .prose code {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .prose blockquote {
+  border-left: 4px solid rgba(0, 0, 0, 0.2) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: #555555 !important;
+}
+
+.article-theme-pure-white .prose ul,
+.article-theme-pure-white .prose ol {
+  color: #444444 !important;
+}
+
+.article-theme-pure-white .text-white {
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .text-white\/80 {
+  color: #555555 !important;
+}
+
+.article-theme-pure-white .text-white\/60 {
+  color: #666666 !important;
+}
+
+.article-theme-pure-white .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 纯黑主题 */
+.article-theme-pure-black .poetize-background {
+  background: #000000 !important;
+  animation: none !important;
+}
+
+.article-theme-pure-black .poetize-background::before {
+  display: none !important;
+}
+
+.article-theme-pure-black .glass-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .prose {
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .prose h1,
+.article-theme-pure-black .prose h2,
+.article-theme-pure-black .prose h3,
+.article-theme-pure-black .prose h4,
+.article-theme-pure-black .prose h5,
+.article-theme-pure-black .prose h6 {
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .prose p {
+  color: #e0e0e0 !important;
+}
+
+.article-theme-pure-black .prose pre {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .prose code {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .prose blockquote {
+  border-left: 4px solid rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #cccccc !important;
+}
+
+.article-theme-pure-black .prose ul,
+.article-theme-pure-black .prose ol {
+  color: #e0e0e0 !important;
+}
+
+.article-theme-pure-black .text-white {
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.article-theme-pure-black .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.article-theme-pure-black .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 目录组件样式 */
+.table-of-contents {
+  position: relative;
+}
+
+/* 桌面端目录样式 - 在侧边栏中使用 */
+.toc-desktop .toc-toggle {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.toc-desktop .toc-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* 移动端目录样式 */
+.toc-mobile .toc-toggle {
+  position: relative;
+  display: block;
+  margin: 0 auto 1rem auto;
+  width: fit-content;
+}
+
+.toc-mobile .toc-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+/* 这些样式已移动到下方的统一定义中 */
+
+.toc-item.active::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+}
+
+/* 目录项悬停效果 */
+.toc-item:hover {
+  transform: translateX(2px);
+}
+
+.toc-desktop .toc-item:hover {
+  transform: translateX(4px);
+}
+
+/* 目录项点击反馈效果 */
+.toc-item-clicked {
+  animation: toc-click-feedback 0.3s ease-out;
+}
+
+@keyframes toc-click-feedback {
+  0% {
+    transform: scale(1) translateX(0);
+    background: rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05) translateX(6px);
+    background: rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    transform: scale(1) translateX(2px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 目录项激活状态增强 */
+.toc-item[data-toc-id] {
+  position: relative;
+  overflow: hidden;
+}
+
+.toc-item[data-toc-id]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.3s ease;
+}
+
+.toc-item[data-toc-id]:hover::before {
+  left: 100%;
+}
+
+/* 响应式设计优化 */
+@media (max-width: 1024px) {
+  .toc-desktop .toc-toggle,
+  .toc-desktop .toc-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .toc-mobile .toc-content {
+    max-height: 50vh;
+  }
+
+  .toc-nav {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toc-mobile .toc-content {
+    max-height: 40vh;
+  }
+
+  .toc-nav {
+    font-size: 0.8rem;
+  }
+
+  .toc-item {
+    padding: 0.375rem 0.5rem !important;
+  }
+}
+
+/* 主题切换按钮样式 */
+.article-theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.article-theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.article-theme-toggle:hover::before {
+  left: 100%;
+}
+
+/* 文章内容区域优化 */
+.article-content {
+  scroll-behavior: smooth;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  scroll-margin-top: 120px;
+  position: relative;
+}
+
+.article-content h1:target,
+.article-content h2:target,
+.article-content h3:target,
+.article-content h4:target,
+.article-content h5:target,
+.article-content h6:target {
+  animation: highlight-heading 2s ease-out;
+}
+
+@keyframes highlight-heading {
+  0% {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+/* 滚动目标高亮效果 */
+.scroll-target-highlight {
+  animation: scroll-highlight 2s ease-out;
+  position: relative;
+}
+
+@keyframes scroll-highlight {
+  0% {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transform: scale(1.02);
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+/* 确保平滑滚动在所有元素上生效 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 强制启用平滑滚动，覆盖可能的冲突样式 */
+* {
+  scroll-behavior: inherit;
+}
+
+/* 确保文档根元素支持平滑滚动 */
+html, body {
+  scroll-behavior: smooth !important;
+}
+
+/* 针对可能禁用动画的用户偏好设置 */
+@media (prefers-reduced-motion: no-preference) {
+  html, body {
+    scroll-behavior: smooth !important;
+  }
+}
+
+/* 为减少动画偏好的用户提供即时滚动 */
+@media (prefers-reduced-motion: reduce) {
+  html, body {
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-target-highlight {
+    animation: none !important;
+  }
+
+  .toc-item-clicked {
+    animation: none !important;
+  }
+}
+
+/* 为不同主题下的高亮效果 */
+.article-theme-pure-white .scroll-target-highlight {
+  animation: scroll-highlight-light 2s ease-out;
+}
+
+@keyframes scroll-highlight-light {
+  0% {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+.article-theme-pure-black .scroll-target-highlight {
+  animation: scroll-highlight-dark 2s ease-out;
+}
+
+@keyframes scroll-highlight-dark {
+  0% {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+/* 目录在不同主题下的样式 */
+.article-theme-pure-white .toc-toggle,
+.article-theme-pure-white .toc-content .glass-card {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #333333 !important;
+}
+
+.article-theme-pure-white .toc-item {
+  color: #555555 !important;
+}
+
+.article-theme-pure-white .toc-item:hover,
+.article-theme-pure-white .toc-item.active {
+  color: #000000 !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.article-theme-pure-black .toc-toggle,
+.article-theme-pure-black .toc-content .glass-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.article-theme-pure-black .toc-item {
+  color: #cccccc !important;
+}
+
+.article-theme-pure-black .toc-item:hover,
+.article-theme-pure-black .toc-item.active {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 目录滚动条优化 */
+.toc-nav {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.toc-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-nav::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.toc-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 目录动画效果 */
+.toc-content {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toc-item {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 目录可见性指示器 */
+.toc-desktop .toc-toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.toc-desktop .toc-toggle:hover::after {
+  background: rgba(255, 255, 255, 0.6);
+  height: 30px;
 }
