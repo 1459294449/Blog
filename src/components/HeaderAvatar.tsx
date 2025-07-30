@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
+import { getAssetPath } from '@/utils/paths';
 import OptimizedImage from './OptimizedImage';
 
 export default function HeaderAvatar() {
@@ -18,7 +19,7 @@ export default function HeaderAvatar() {
 
   return (
     <OptimizedImage
-      src={getAvatarPath()}
+      src={getAssetPath(getAvatarPath())}
       alt={`${profileConfig.name} Avatar`}
       className="w-full h-full object-cover"
       onError={handleImageError}

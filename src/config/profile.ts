@@ -2,8 +2,8 @@
 export const profileConfig = {
   // 基本信息
   name: 'MarkChin',
-  title: 'Full Stack Developer',
-  bio: '欢迎来到我的个人博客！我是一名热爱技术的开发者，专注于现代 Web 开发技术。',
+  title: '211本科人工智能',
+  bio: '欢迎来到我的个人博客！211人工智能本科，科技、小说、动漫爱好者。希望您可以喜欢我的博客。',
   
   // 头像设置
   avatar: {
@@ -15,8 +15,8 @@ export const profileConfig = {
   
   // 联系方式
   contact: {
-    email: 'your-email@example.com',
-    github: 'https://github.com/yourusername',
+    email: '1459294449@qq.com',
+    github: 'https://github.com/1459294449',
     twitter: 'https://twitter.com/yourusername',
     linkedin: 'https://linkedin.com/in/yourusername',
   },

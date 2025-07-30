@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PostMetadata } from '@/lib/markdown';
 import SearchBox from './SearchBox';
 import { profileConfig, getAvatarPath, getFallbackLetter } from '@/config/profile';
+import { getAssetPath } from '@/utils/paths';
 import OptimizedImage from './OptimizedImage';
 
 interface SidebarProps {
@@ -36,7 +37,7 @@ export default function Sidebar({ posts, className = '' }: SidebarProps) {
         {/* 头像 */}
         <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/20">
           <OptimizedImage
-            src={getAvatarPath()}
+            src={getAssetPath(getAvatarPath())}
             alt={`${profileConfig.name} 头像`}
             className="w-full h-full object-cover"
             onError={(e) => {
